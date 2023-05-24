@@ -1,9 +1,9 @@
 import { TextInput, View, StyleSheet, Alert } from "react-native"
-import PrimaryButton from "../components/PrimaryButton"
+import PrimaryButton from "../components/ui/PrimaryButton"
 import { useState } from "react"
 //magical! control the keyboard in the textInput
 //we need to put each button in it's own view. What does this do? it will apply new flexbox containes to each button and each container will have a flex direction of column and the button will be stretched for it's column
-function StartGameScreen(){
+function StartGameScreen({onPickNumber}){
     //catch user input with state!
     //TextInput will always return a string, even though it's from a number-pad, so tell state to expect a string!
     //bind the state to the text input by passing a pointer to it using value
@@ -30,20 +30,28 @@ function confirmInputHandler(){
         //can also use Alert.prompt to start a dialogue
         //creates a native alert dialogue built into IOS or Android
         //takes 3 args!
-        Alert.alert("Invalid Number!", "Number must be between 1 and 99", {text:"Okay", style:'destructive', onPress:resetInputHandler})
+        console.log("nan")
+        Alert.alert("Invalid Number!", "Number must be between 1 and 99", [{text:"Okay", style:'destructive', onPress:resetInputHandler}])
         //cancel the exe if we got into the if and it fails
         return
     }
     console.log('Valid Number!!')
+    onPickNumber(chosenNumber)
 }
 
     return <View style={styles.inputContainer}>
-        <TextInput style={styles.textInput} maxLength={2} keyboardType="number-pad" autoCapitalize="none" autoCorrect={false} value={enteredNumber}
-        onChangeText={numberInputHandler}/>
+        <TextInput style={styles.textInput}
+         maxLength={2}
+          keyboardType="number-pad" 
+          onSubmitEditing={confirmInputHandler}
+          autoCapitalize="none" 
+          autoCorrect={false} 
+        onChangeText={numberInputHandler} 
+        value={enteredNumber}/>
         <View style={styles.buttonContainer}> 
         <View style={styles.buttonViewToStretch}><PrimaryButton onPress={resetInputHandler
         }>Reset</PrimaryButton></View>
-       <View style={styles.buttonViewToStretch}><PrimaryButton onPress={confirmInputHandler} >Confirm</PrimaryButton></View>
+       <View style={styles.buttonViewToStretch}><PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton></View>
         </View>
     </View>
 }

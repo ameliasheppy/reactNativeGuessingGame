@@ -8,7 +8,12 @@ function PrimaryButton({children, onPress}){
     //pressed is a bool we can use to determine which style objs to apply, we can pass in an arr of styles!
     return (
     <View style={styles.buttonOuterContainer}>
-          <Pressable style={({pressed}) => pressed ? [styles.container, styles.pressed] :  styles.container} onPress={onPress} android_ripple={{color:"grey"}}>
+          <Pressable style={({pressed}) => 
+          pressed ? [styles.container, styles.pressed]
+           :  styles.container
+        } 
+          onPress={onPress} 
+          android_ripple={{color:"grey"}}>
         <Text style={styles.buttonText}>{children}</Text>
         </Pressable>
     </View>
