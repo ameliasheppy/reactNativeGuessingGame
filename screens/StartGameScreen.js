@@ -1,5 +1,8 @@
-import { TextInput, View, StyleSheet, Alert } from "react-native"
-import PrimaryButton from "../components/ui/PrimaryButton"
+import { TextInput, View, StyleSheet, Alert} from "react-native"
+import PrimaryButton from "../components/ui/PrimaryButton";
+import Card from "../components/ui/Card";
+import Title from "../components/ui/Title";
+import InstructionText from "../components/ui/InstructionText";
 import { useState } from "react"
 //magical! control the keyboard in the textInput
 //we need to put each button in it's own view. What does this do? it will apply new flexbox containes to each button and each container will have a flex direction of column and the button will be stretched for it's column
@@ -39,7 +42,11 @@ function confirmInputHandler(){
     onPickNumber(chosenNumber)
 }
 
-    return <View style={styles.inputContainer}>
+    return (
+    <View style={styles.rootContainer}>
+    <Title>Guess My Number</Title>
+    <Card>
+        <InstructionText>Enter a Number</InstructionText>
         <TextInput style={styles.textInput}
          maxLength={2}
           keyboardType="number-pad" 
@@ -53,29 +60,18 @@ function confirmInputHandler(){
         }>Reset</PrimaryButton></View>
        <View style={styles.buttonViewToStretch}><PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton></View>
         </View>
+        </Card>
     </View>
+    )
 }
 
 export default StartGameScreen
 
 const styles = StyleSheet.create({
-    //main view styles
-    inputContainer:{
-        marginHorizontal:24,
-        padding: 16,
+    rootContainer:{
+        flex:1,
         marginTop:100,
-        backgroundColor:'#72063c',
-        borderRadius:8,
-        //want a shadow? add elevation for Android!
-        elevation:4,
-        //IOS box shadow:
-        shadowColor:'black', 
-        shadowOffset:{width:0, height:2},
-        shadowColor:6,
-        shadowOpacity:0.4,
-        //positions on the cross axis
-        //main axis is center by default
-        justifyContent:'center',
+        //change from the default stretch to center
         alignItems:'center'
     },
     textInput:{
