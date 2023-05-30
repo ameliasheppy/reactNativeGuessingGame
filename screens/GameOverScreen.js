@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     gameOverBR:{
         overflow:'hidden',
         borderRadius:150,
-        width:300,
+        width:302,
         height:300,
         borderWidth:3,
         borderColor:'teal',
